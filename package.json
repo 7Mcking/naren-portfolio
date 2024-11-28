@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "naren-portfolio",
   "homepage": "https://7Mcking.github.io/naren-portfolio",
   "private": true,
   "version": "0.0.0",
@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
     "predploy": "npm run build",
+    "deploy": "gh-pages -d dist"/
   },
   "dependencies": {
     "@react-spring/three": "^9.7.3",
