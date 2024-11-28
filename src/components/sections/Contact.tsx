@@ -23,7 +23,7 @@ export function Contact() {
         "service_o2mzpme", // Replace with your EmailJS service ID
         "template_qyc5qxf", // Replace with your EmailJS template ID
         formData,
-        "sadhwaninaren@gmail.com" // Replace with your EmailJS user ID
+        "IhR14mLuZlP12EiQS" // Replace with your EmailJS user ID
       )
       .then(
         (result) => {
