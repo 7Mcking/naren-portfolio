@@ -1,7 +1,42 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import emailjs from "emailjs-com";
 
 export function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        formData,
+        "YOUR_USER_ID" // Replace with your EmailJS user ID
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Message sent successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Failed to send message. Please try again.");
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
@@ -38,25 +73,35 @@ export function Contact() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="space-y-6"
+            onSubmit={handleSubmit}
           >
             <div>
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full p-3 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-white"
               />
             </div>
             <div>
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full p-3 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-white"
               />
             </div>
             <div>
               <textarea
+                name="message"
                 placeholder="Your Message"
                 rows={4}
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full p-3 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-white resize-none"
               />
             </div>
@@ -73,4 +118,3 @@ export function Contact() {
     </section>
   );
 }
-
